@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Lösung für Tag 2.
  * 
- * @author Yanik Recke
+ * @author Yanik Recke 
  */
 public class Day_2 {
 
