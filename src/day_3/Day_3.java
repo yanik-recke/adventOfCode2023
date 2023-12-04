@@ -14,7 +14,7 @@ import helpers.HelperMethods;
 /**
  * Lösung für Tag 3.
  * 
- * @author Yanik Recke
+ * @author Yanik Recke 
  */
 public class Day_3 {
 
