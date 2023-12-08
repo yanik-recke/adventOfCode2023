@@ -1,7 +1,6 @@
 package day_7;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -85,13 +84,6 @@ public class Day_7 {
 			
 			String hand = line.split(" ")[0];
 			int value = Integer.parseInt(line.split(" ")[1]);
-			int count = 0;
-			boolean done = false;
-			int val = 0;
-			
-			for (int i = 0; i < hand.length(); i++) {
-				val += getVal(hand.charAt(i));
-			}
 			
 			for (int i = 0; i < hand.length(); i++) {
 				char c = hand.charAt(i);
