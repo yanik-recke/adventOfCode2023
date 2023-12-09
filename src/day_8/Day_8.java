@@ -167,6 +167,7 @@ public class Day_8 {
 				}
 			}
 		}
+
 		
 	    long result = list.get(0);
 	    
