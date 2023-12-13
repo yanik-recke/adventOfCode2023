@@ -30,3 +30,7 @@ hs_err_pid*
 *.classpath
 *.project
 /bin/
+
+# input files (aoc)
+input.txt
+input2.txt
