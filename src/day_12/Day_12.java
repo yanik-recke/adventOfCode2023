@@ -19,6 +19,13 @@ public class Day_12 {
 		System.out.print(part1(pathToInput) + " - ");
 	} 
 	
+	
+	/**
+	 * Jede mögliche Kombination rekursiv bruteforcen.
+	 * 
+	 * @param path - Pfad zum Input
+	 * @return
+	 */
 	private static long part1(String path) {
 		List<String> input = helpers.HelperMethods.getInputAsListOfString(path);
 		long result = 0;
@@ -34,6 +41,19 @@ public class Day_12 {
 	}
 	
 	
+	/**
+	 * Hilfsmethode zum bruteforcen von p1.
+	 * -> String startet mit '.', bei substring(1) weitermachen
+	 * -> String startet mit '?', zunächst mit '.' ersetzen, dann mit '#'
+	 * -> String startet mit '#', prüfen, ob lang genug um nächste Anzahl zu erfüllen, sonst verwerfen
+	 * -> String leer? Prüfen ob /nums/ auch leer, wenn ja +1, sonst +0
+	 * -> /nums/ leer? Prüfen, ob String noch '#' enthält, wenn nicht +1, sonst +0
+	 * 
+	 * @param count
+	 * @param curr
+	 * @param nums
+	 * @return
+	 */
 	private static long check(long count, String curr, List<Integer> nums) {
 		
 		if (curr.charAt(0) == '.') {
