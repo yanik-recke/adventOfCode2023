@@ -40,6 +40,23 @@ class Position {
 	}
 	
 	
+	/**
+	 * Nachbarposition in übergebene Richtung
+	 * berechnen.
+	 * 
+	 * @param d - Richtung
+	 * @return - neue Position
+	 */
+	public Position getNeighbour(Direction d) {
+		return switch(d) {
+			case TOP -> new Position(this.x, this.y - 1);
+			case RIGHT -> new Position(this.x + 1, this.y);
+			case DOWN -> new Position(this.x, this.y + 1);
+			default -> new Position(this.x - 1, this.y);
+		};
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		return obj != null && obj instanceof Position && ((Position) obj).getX() == this.x && ((Position) obj).getY() == this.y;
