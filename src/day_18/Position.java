@@ -6,8 +6,8 @@ package day_18;
  * @author Yanik Recke
  */
 class Position {
-	private int x = 0;
-	private int y = 0;
+	private long x = 0;
+	private long y = 0;
 	
 	/**
 	 * Konstruktor, setzt x und y.
@@ -15,7 +15,7 @@ class Position {
 	 * @param x
 	 * @param y
 	 */
-	public Position(int x, int y) {
+	public Position(long x, long y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -26,7 +26,7 @@ class Position {
 	 * 
 	 * @return - x-Koordinate
 	 */
-	public int getX() {
+	public long getX() {
 		return this.x;
 	}
 	
@@ -35,7 +35,7 @@ class Position {
 	 * 
 	 * @return - y-Koordinate
 	 */
-	public int getY() {
+	public long getY() {
 		return this.y;
 	}
 	
@@ -64,13 +64,13 @@ class Position {
 	
 	@Override
 	public int hashCode() {
-	    int result = x;
+	    long result = x;
 	    result = 31 * result + y;
-	    return result;
+	    return (int) result;
 	}
 	
 	@Override
 	public String toString() {
-		return this.x + "|" + this.y;
+		return "(" + this.x + "," + this.y + ")";
 	}
 }
