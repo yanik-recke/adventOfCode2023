@@ -23,6 +23,12 @@ public class Day_18 {
 	}
 	
 	
+	/**
+	 * Erst Ränder berechnen und dann Flood-Fill.
+	 * 
+	 * @param path - Pfad zum Input
+	 * @return
+	 */
 	private static long part1(String path) {
 		List<String> input = helpers.HelperMethods.getInputAsListOfString(path);
 		
@@ -92,58 +98,55 @@ public class Day_18 {
 	}
 	
 	
-	class Point2D {
-	    public double x;
-	    public double y;
+	/**
+	 * Hilfsmethode für Shoelace Algorithmus.
+	 * 
+	 * @param positions - Liste an Positionen
+	 * @return
+	 */
+    private static long shoelace(List<Position> positions) {
+        long area = 0;
 
-	    public Point2D(double x, double y) {
-	        this.x = x;
-	        this.y = y;
-	    }
-	}
-	
-	
-    private static long shoelace_formula(List<Position> points) {
-        long area = 0L;
-
-        int j = points.size() - 1;
-        for (int i = 0; i < points.size(); i++) {
-            
-            area += points.get(i).getX() * points.get(j).getY() - points.get(j).getX() * points.get(i).getY();
-            j = i;
+        int j;
+        for (int i = 0; i < positions.size(); i++) {
+            j = (i + 1) % positions.size();
+            area += positions.get(i).getX() * positions.get(j).getY() - positions.get(j).getX() * positions.get(i).getY();
         }
 
-        System.out.println(area);
-        return area / 2;
+        return area / 2;   
     }
 
-    public static long polyarea(List<Position> points) {
-        return Math.abs(shoelace_formula(points));
-    }
-	
+    
+    /**
+     * Berechnen der äußeren Punkte und dann mit Satz von Pick
+     * und Shoelace Algorithmus innere Fläche + begrenzende Punkte
+     * berechnen.
+     * 
+     * @param path - Pfad zum Input
+     * @return
+     */
 	private static long part2(String path) {
 		List<String> input = helpers.HelperMethods.getInputAsListOfString(path);
 		
 		Position curr = new Position(0, 0);
 		Position next;
-		Set<Position> dug = new HashSet<>();
-		dug.add(curr);
+		long steps;
+		char dir;
+		String hexa; 
 		
-		
+		long sum = 0;
 		List<Position> positions = new ArrayList<>();
 		positions.add(curr);
-		StringBuilder sb = new StringBuilder();
-		sb.append(curr);
+
 		for (String line : input) {
-			String hexa = line.split(" ")[2].trim();
+			hexa = line.split(" ")[2].trim();
 			hexa = hexa.substring(1, hexa.length() - 1);
-			char dir = hexa.charAt(hexa.length() - 1);
+			dir = hexa.charAt(hexa.length() - 1);
 			hexa = hexa.substring(1, hexa.length() - 1);
-			
-			long steps = Long.parseLong(hexa, 16);
+			steps = Long.parseLong(hexa, 16);
+			sum += steps;
 			
 			switch (dir) {
-			
 				// UP
 				case '3' -> {
 					next = new Position(curr.getX(), curr.getY() - steps);
@@ -174,33 +177,9 @@ public class Day_18 {
 			}
 		}
 		
+		
 		positions.remove(positions.size() - 1);
-		//22229015025000 too high, 2222901502500 too low
-		System.out.println(polyarea(positions));
-		
-//		for (Position p : positions) {
-//			System.out.println(p);
-//		}
-		
-	
-//		Queue<Position> q = new LinkedList<>();
-//		// assume 1,1 is inside
-//		q.add(new Position(1,1));
-//		
-//		while (!q.isEmpty()) {
-//			curr = q.poll();
-//			
-//			if (!dug.contains(curr)) {
-//				dug.add(curr);
-//				
-//				for (Direction d : Direction.values()) {
-//					q.add(curr.getNeighbour(d));
-//				}
-//			}
-//			
-//		}
-		
-		return dug.size();
+		return (shoelace(positions) + (sum / 2) + 1);
 	}
 	
 }
